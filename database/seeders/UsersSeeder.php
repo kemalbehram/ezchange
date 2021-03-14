@@ -20,6 +20,7 @@ class UsersSeeder extends DatabaseSeeder
                 'last_name' => $faker->unique()->lastName,
                 'country'     => $faker->countryCode,
                 'created_at' => $faker->dateTimeThisYear(),
+                'mobile_number' => '0914'. random_int(0,9) . random_int(0,9) . random_int(0,9) . random_int(0,9) . random_int(0,9) . random_int(0,9) . random_int(0,9)
             ]);
 
             $user->roles()->attach(Sentinel::findRoleById(rand(1, 2)));

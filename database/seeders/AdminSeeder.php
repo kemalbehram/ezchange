@@ -24,12 +24,14 @@ class AdminSeeder extends DatabaseSeeder
             'password'    => "admin",
             'first_name'  => 'John',
             'last_name'   => 'Doe',
+            'mobile_number' => '09147408669'
         ]);
         $user = Sentinel::registerAndActivate([
             'email'       => 'user@user.com',
             'password'    => "user",
             'first_name'  => 'John',
             'last_name'   => 'Doe',
+            'mobile_number' => '08147408669'
         ]);
 
         // create 2 roles

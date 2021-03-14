@@ -109,7 +109,7 @@ class UserController extends Controller
         $request->merge([
             'user_id' => $u_id
         ]);
-        (new SMSController())->send_verification_code();
+        (new SMSController())->send_verification_code($request);
         if ($u_id)
         {
             return ['status' => 'success', 'message' => 'ثبت نام شما با موفقیت انجام شد. کد تأیید به شماره شما ارسال شد', 'data' => null];

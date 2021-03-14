@@ -93,8 +93,8 @@ class MigrationCartalystSentinel extends Migration
 
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('email');
-            $table->string('password');
+            $table->string('email')->nullable();
+            $table->string('password')->nullable();
             $table->text('permissions')->nullable();
             $table->timestamp('last_login')->nullable();
             $table->string('first_name')->nullable();
@@ -119,6 +119,6 @@ class MigrationCartalystSentinel extends Migration
         Schema::drop('roles');
         Schema::drop('role_users');
         Schema::drop('throttle');
-        Schema::drop('users');
+//        Schema::drop('users');
     }
 }
