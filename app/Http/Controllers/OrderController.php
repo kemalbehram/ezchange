@@ -14,6 +14,31 @@ use PhpParser\Node\Expr\PreDec;
 
 class OrderController extends Controller
 {
+    public function data_table()
+    {
+        $users = Order::get(['id', 'first_name', 'last_name', 'email','created_at']);
+
+        return DataTables::of($users)
+            ->editColumn(
+                'created_at',
+                function (Order $order) {
+                    return $order->created_at->diffForHumans();
+                }
+            )
+            ->addColumn(
+                'actions',
+                function ($order) {
+                    $actions = '<a href='. route('admin.orders.show', $order->id) .'><i class="livicon" data-name="info" data-size="18" data-loop="true" data-c="#428BCA" data-hc="#428BCA" title="view user"></i></a>
+                            <a href='. route('admin.orders.edit', $order->id) .'><i class="livicon" data-name="edit" data-size="18" data-loop="true" data-c="#428BCA" data-hc="#428BCA" title="update user"></i></a>';
+                    if ((Sentinel::getUser()->id != $order->id) && ($order->id >2)) {
+                        $actions .= '<a href='. route('admin.users.confirm-delete', $order->id) .' data-id="'.$order->id.'" data-toggle="modal" data-target="#delete_confirm"><i class="livicon" data-name="user-remove" data-size="18" data-loop="true" data-c="#f56954" data-hc="#f56954" title="delete user"></i></a>';
+                    }
+                    return $actions;
+                }
+            )
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
     public function index(): array
     {
         $orders = Order::all();

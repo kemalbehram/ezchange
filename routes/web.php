@@ -2,6 +2,8 @@
 
 require_once 'web_builder.php';
 
+use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -122,6 +124,42 @@ Route::group(
                 Route::get('{user}/confirm-delete', 'UsersController@getModalDelete')->name('users.confirm-delete');
                 Route::get('{user}/restore', 'UsersController@getRestore')->name('restore.user');
                 //        Route::post('{user}/passwordreset', 'UsersController@passwordreset')->name('passwordreset');
+                Route::post('passwordreset', 'UsersController@passwordreset')->name('passwordreset');
+            }
+        );
+
+        // Order Management - ezchange
+        Route::group(
+            ['prefix' => 'orders'],
+            function () {
+                Route::get('data', [OrderController::class, 'data_table'])->name('orders.data');
+                Route::get('{order}/delete', [UsersController::class, 'destroy'])->name('orders.delete');
+                Route::get('{order}/confirm-delete', [UsersController::class, 'getModalDelete'])->name('orders.confirm-delete');
+                Route::get('{order}/restore', 'UsersController@getRestore')->name('restore.user');
+                Route::post('passwordreset', 'UsersController@passwordreset')->name('passwordreset');
+            }
+        );
+
+        // BankCard Management - ezchange
+        Route::group(
+            ['prefix' => 'bankcards'],
+            function () {
+                Route::get('data', [OrderController::class, 'data_table'])->name('bankcards.data');
+                Route::get('{card}/delete', [UsersController::class, 'destroy'])->name('orders.delete');
+                Route::get('{card}/confirm-delete', [UsersController::class, 'getModalDelete'])->name('orders.confirm-delete');
+                Route::get('{card}/restore', [UsersController::class, 'getRestore'])->name('restore.user');
+                Route::post('passwordreset', [UsersController::class, 'passwordreset'])->name('passwordreset');
+            }
+        );
+
+        // Transaction Management - ezchange
+        Route::group(
+            ['prefix' => 'transactions'],
+            function () {
+                Route::get('data', [OrderController::class, 'data_table'])->name('orders.data');
+                Route::get('{order}/delete', [UsersController::class, 'destroy'])->name('orders.delete');
+                Route::get('{order}/confirm-delete', [UsersController::class, 'getModalDelete'])->name('orders.confirm-delete');
+                Route::get('{order}/restore', 'UsersController@getRestore')->name('restore.user');
                 Route::post('passwordreset', 'UsersController@passwordreset')->name('passwordreset');
             }
         );
