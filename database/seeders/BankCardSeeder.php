@@ -3,8 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\BankCard;
+use App\Models\User;
 use Faker\Factory;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class BankCardSeeder extends Seeder
 {
@@ -18,19 +20,17 @@ class BankCardSeeder extends Seeder
         {
             for ($counter = 0; $counter < random_int(5, 8); $counter++)
             {
-                $amount = random_int(50, 500);
-                $price = random_int(230, 300);
                 BankCard::create([
-                    'user_id' => $id,
-                    'amount_in_tethers' => $amount,
-                    'amount_in_rials' => $amount * $price,
-                    'price_in_rials' => $price,
-                    'tx_id' => '1234567890',
-                    'pay_time' => now(),
-                    'payment_status' => '0',
-                    'type' => 'buy',
-                    'status' => 'process',
-                    'psp_url' => $faker->url,
+                    'status' => 1,
+                    'bank' => 'mellat',
+                    'user_id' => 1,
+                    'account_number' => '782649234362',
+                    'card_number' => '1234567891234567',
+                    'deposit' =>'0',
+                    'withdraw' => '1',
+                    'owner_first_name' => $faker->firstName,
+                    'owner_last_name' => $faker->lastName,
+                    'iban' => '5646812316'
                 ]);
             }
         }
