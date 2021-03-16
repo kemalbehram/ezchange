@@ -23,5 +23,11 @@ return [
     'state'					=> 'استان',
     'postal'				=> 'کدپستی',
     'id'				    => 'شناسه',
-    'actions'               => 'عملیات'
+    'actions'               => 'عملیات',
+	'last_login'            => 'آخرین بازدید',
+	'national_code'   		=> 'کد ملی',
+	'parent_name'			=> 'نام پدر',
+	'is_verified'			=> 'وضعیت احراز هویت',
+	'referral_code'         => 'کد دعوت',
+	'referrer_id'			=> 'معرف'
 ];
