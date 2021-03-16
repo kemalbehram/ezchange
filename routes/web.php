@@ -2,6 +2,7 @@
 
 require_once 'web_builder.php';
 
+use App\Http\Controllers\FrontEndController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +21,10 @@ Route::pattern('slug', '[a-z0-9- _]+');
 Route::group(
     ['prefix' => 'admin', 'namespace' => 'Admin'],
     function () {
+        /* start ezchabge custom routes */
+        Route::get('orders-list', [FrontendController::class, "orders_list"])->name('orders-list');
+        Route::get('orders-det', [FrontendController::class, "orders_det"])->name('orders-det');
+        /* end ezchange custom routes */
 
         // Error pages should be shown without requiring login
         Route::get(
@@ -127,13 +132,13 @@ Route::group(
         );
         Route::resource('users', 'UsersController');
         /************
-     * bulk import
-    ****************************/
+         * bulk import
+         ****************************/
         Route::get('bulk_import_users', 'UsersController@import');
         Route::post('bulk_import_users', 'UsersController@importInsert');
         /****************
-     bulk download
-    **************************/
+        bulk download
+         **************************/
         Route::get('download_users/{type}', 'UsersController@downloadExcel');
 
 
@@ -280,8 +285,8 @@ Route::group(
 );
 
 // FrontEndController
-Route::get('walletsList', 'FrontEndController@walletsList');
-Route::get('settingsj', 'FrontEndController@settingsj');
+
+
 Route::get('login', 'FrontEndController@getLogin')->name('login');
 Route::post('login', 'FrontEndController@postLogin')->name('login');
 Route::get('register', 'FrontEndController@getRegister')->name('register');
@@ -348,6 +353,4 @@ Route::get('news', 'NewsController@index')->name('news');
 Route::get('news/{news}', 'NewsController@show')->name('news.show');
 
 Route::get('{name?}', 'FrontEndController@showFrontEndView');
-
-
 // End of frontend views
