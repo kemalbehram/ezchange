@@ -6,11 +6,13 @@
 
 return [
 
-    'user'			        => 'نام کاربری',
-    'amount'			    => 'مقدار',
-    'Unit_Price'			=> 'قیمت واحد',
-    'date'			        => 'تاریخ',
-    'Total_Price'			=> 'قیمت کل',
-    'status'				=> 'وضعیت',
+    'id'			        => 'ردیف',
+    'amount_in_tethers'		=> 'مقدار سفارش',
+    'amount_in_rials'		=> 'مقدار کل',
+    'price_in_rials'		=> 'قیمت واحد',
+    'type'			        => 'نوع سفارش',
+    'payment_status'		=> 'وضعیت',
+    'pay_time'				=> 'تاریخ پرداخت',
+    'created_at'			=> 'تاریخ ایجاد سفارش',
     'actions'               => 'عملیات'
 ];

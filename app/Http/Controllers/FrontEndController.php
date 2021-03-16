@@ -29,13 +29,13 @@ use App\Models\Country;
 
 class FrontEndController extends JoshController
 {
-   public function walletsList()
+    public function orders_list()
     {
-        return view('admin.wallets_lists');
+        return view('admin.orders.orders_list');
     }
-public function settingsj()
+    public function orders_det()
     {
-        return view('admin.setting');
+        return view('admin.orders.orders_det');
     }
     /*
      * $user_activation set to false makes the user activation via user registered email
@@ -108,7 +108,6 @@ public function settingsj()
     }
 
     /**
-     * 
      * update user details and display
      *
      * @param  Request $request
@@ -306,7 +305,7 @@ public function settingsj()
         }
 
         if ($reminder = Reminder::get($user, $passwordResetCode) && Reminder::exists($user)) {
-                return view('forgotpwd-confirm', compact(['userId', 'passwordResetCode']));
+            return view('forgotpwd-confirm', compact(['userId', 'passwordResetCode']));
         } else {
             return 'does not exists';
         }
