@@ -16,7 +16,7 @@ class OrderController extends Controller
 {
     public function data_table()
     {
-        $users = Order::get(['id', 'first_name', 'last_name', 'email','created_at']);
+        $users = Order::get(['id', 'amount_in_tethers', 'amount_in_rials', 'price_in_rials','created_at', 'type', 'payment_status', 'pay_time']);
 
         return DataTables::of($users)
             ->editColumn(
@@ -39,6 +39,7 @@ class OrderController extends Controller
             ->rawColumns(['actions'])
             ->make(true);
     }
+
     public function index(): array
     {
         $orders = Order::all();
