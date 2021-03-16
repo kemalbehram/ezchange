@@ -72,33 +72,33 @@
     <script type="text/javascript" src="{{ asset('vendors/datatables/js/jquery.dataTables.js') }}" ></script>
     <script type="text/javascript" src="{{ asset('vendors/datatables/js/dataTables.bootstrap4.js') }}" ></script>
 
-    <script>
+<script>
 
-        $(function() {
-            var table = $('#table').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: '{!! route('admin.orders.data') !!}',
-                columns: [
-                    { data: 'id', name: 'id' },
-                    { data: 'amount_in_tethers', name: 'amount_in_tethers' },
-                    { data: 'amount_in_rials', name: 'amount_in_rials' },
-                    { data: 'price_in_rials', name: 'price_in_rials'},
-                    { data: 'type', name: 'type'},
-                    { data: 'payment_status', name:'payment_status'},
-                    { data: 'pay_time', name:'pay_time'},
-                    { data: 'created_at', name:'created_at'},
-                    { data: 'actions', name: 'actions', orderable: false, searchable: false }
-                ]
-            });
-            table.on( 'draw', function () {
-                $('.livicon').each(function(){
-                    $(this).updateLivicon();
-                });
-            } );
+    $(function() {
+        var table = $('#table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: '{!! route('admin.orders.data') !!}',
+            columns: [
+                { data: 'id', name: 'id' },
+                { data: 'amount_in_tethers', name: 'amount_in_tethers' },
+                { data: 'amount_in_rials', name: 'amount_in_rials' },
+                { data: 'price_in_rials', name: 'price_in_rials'},
+                { data: 'type', name: 'type'},
+                { data: 'payment_status', name:'payment_status'},
+                { data: 'pay_time', name:'pay_time'},
+                { data: 'created_at', name:'created_at'},
+                { data: 'actions', name: 'actions', orderable: false, searchable: false }
+            ]
         });
+        table.on( 'draw', function () {
+            $('.livicon').each(function(){
+                $(this).updateLivicon();
+            });
+        } );
+    });
 
-    </script>
+</script>
 
     <div class="modal fade" id="delete_confirm" tabindex="-1" role="dialog" aria-labelledby="deleteLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -119,18 +119,18 @@
         </div>
     </div>
     <!-- /.modal-dialog -->
-    <script>
-        $(function () {
-            $('body').on('hidden.bs.modal', '.modal', function () {
-                $(this).removeData('bs.modal');
-            });
-        });
-        var $url_path = '{!! url('/') !!}';
-        $('#delete_confirm').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget)
-            var $recipient = button.data('id');
-            var modal = $(this)
-            modal.find('.modal-footer a').prop("href",$url_path+"/admin/users/"+$recipient+"/delete");
-        })
-    </script>
+<script>
+$(function () {
+	$('body').on('hidden.bs.modal', '.modal', function () {
+		$(this).removeData('bs.modal');
+	});
+});
+var $url_path = '{!! url('/') !!}';
+$('#delete_confirm').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget)
+    var $recipient = button.data('id');
+    var modal = $(this)
+    modal.find('.modal-footer a').prop("href",$url_path+"/admin/users/"+$recipient+"/delete");
+})
+</script>
 @stop

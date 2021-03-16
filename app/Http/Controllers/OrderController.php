@@ -11,14 +11,16 @@ use Illuminate\Support\Str;
 use League\Flysystem\Config;
 use phpDocumentor\Reflection\Types\This;
 use PhpParser\Node\Expr\PreDec;
+use Yajra\DataTables\DataTables;
 
 class OrderController extends Controller
 {
     public function data_table()
     {
-        $users = Order::get(['id', 'amount_in_tethers', 'amount_in_rials', 'price_in_rials','created_at', 'type', 'payment_status', 'pay_time']);
+        $orders = Order::all(['id', 'amount_in_tethers', 'amount_in_rials', 'price_in_rials','created_at', 'type', 'payment_status', 'pay_time']);
 
-        return DataTables::of($users)
+//        dd($orders);
+        return DataTables::of($orders)
             ->editColumn(
                 'created_at',
                 function (Order $order) {
@@ -27,12 +29,9 @@ class OrderController extends Controller
             )
             ->addColumn(
                 'actions',
-                function ($order) {
+                function (Order $order) {
                     $actions = '<a href='. route('admin.orders.show', $order->id) .'><i class="livicon" data-name="info" data-size="18" data-loop="true" data-c="#428BCA" data-hc="#428BCA" title="view user"></i></a>
                             <a href='. route('admin.orders.edit', $order->id) .'><i class="livicon" data-name="edit" data-size="18" data-loop="true" data-c="#428BCA" data-hc="#428BCA" title="update user"></i></a>';
-                    if ((Sentinel::getUser()->id != $order->id) && ($order->id >2)) {
-                        $actions .= '<a href='. route('admin.users.confirm-delete', $order->id) .' data-id="'.$order->id.'" data-toggle="modal" data-target="#delete_confirm"><i class="livicon" data-name="user-remove" data-size="18" data-loop="true" data-c="#f56954" data-hc="#f56954" title="delete user"></i></a>';
-                    }
                     return $actions;
                 }
             )

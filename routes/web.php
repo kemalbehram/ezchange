@@ -3,6 +3,7 @@
 require_once 'web_builder.php';
 
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\FrontEndController;
 use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
@@ -139,8 +140,9 @@ Route::group(
                 Route::get('data', [OrderController::class, 'data_table'])->name('orders.data');
                 Route::get('{order}/delete', [UsersController::class, 'destroy'])->name('orders.delete');
                 Route::get('{order}/confirm-delete', [UsersController::class, 'getModalDelete'])->name('orders.confirm-delete');
-                Route::get('{order}/restore', 'UsersController@getRestore')->name('restore.user');
-                Route::post('passwordreset', 'UsersController@passwordreset')->name('passwordreset');
+                Route::get('{order}/restore', 'UsersController@getRestore')->name('restore.order');
+                Route::get('{order}/show', 'UsersController@getRestore')->name('orders.show');
+                Route::get('{order}/edit', 'UsersController@getRestore')->name('orders.edit');
             }
         );
 
