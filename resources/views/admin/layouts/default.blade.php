@@ -62,8 +62,7 @@
                             @endif
                             <div class="riot">
                                 <div>
-                                    <p class="user_name_max">{{ Sentinel::getUser()->first_name }}
-                                        {{ Sentinel::getUser()->last_name }}</p>
+                                    <p class="user_name_max">{{ Sentinel::getUser()->full_name }}</p>
                                     <span>
                                         <i class="caret"></i>
                                     </span>
@@ -88,8 +87,7 @@
                                 <img src="{{ asset('images/authors/no_avatar.jpg') }}" alt="img" height="35px"
                                     width="35px" class="rounded-circle img-fluid float-left" />
                                 @endif
-                                <p class="topprofiletext">{{ Sentinel::getUser()->first_name }}
-                                    {{ Sentinel::getUser()->last_name }}</p>
+                                <p class="topprofiletext">{{ Sentinel::getUser()->full_name }}</p>
                             </li>
                             <!-- Menu Body -->
                             <li>

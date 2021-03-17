@@ -16,20 +16,13 @@ class BankCardController extends Controller
 {
     public function data_table()
     {
-        $cards = BankCard::all(['id', 'owner_first_name', 'owner_last_name', 'bank','account_number', 'card_number', 'iban', 'deposit', 'withdraw', 'created_at']);
+        $cards = BankCard::all(['id', 'owner_first_name', 'owner_last_name', 'bank','account_number', 'card_number', 'iban', 'is_verified', 'deposit', 'withdraw', 'status', 'created_at']);
 
         return DataTables::of($cards)
             ->editColumn(
                 'created_at',
                 function (BankCard $card) {
-                    return $card->created_at->diffForHumans();
-                }
-            )
-            ->editColumn(
-                'bank',
-                function (BankCard $card) {
-
-                    return $card->created_at->diffForHumans();
+                    return verta($card->created_at)->format('H:m:s Y-m-d');
                 }
             )
             ->addColumn(
