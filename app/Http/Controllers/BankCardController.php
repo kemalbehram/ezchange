@@ -26,6 +26,12 @@ class BankCardController extends Controller
                 }
             )
             ->addColumn(
+                'full_name',
+                function (BankCard $card) {
+                    return $card->owner_first_name . $card->owner_last_name;
+                }
+            )
+            ->addColumn(
                 'actions',
                 function (BankCard $card) {
                     $actions = '<a href='. route('admin.bankcards.show', $card->id) .'><i class="livicon" data-name="info" data-size="18" data-loop="true" data-c="#428BCA" data-hc="#428BCA" title="view user"></i></a>
