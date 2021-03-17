@@ -77,43 +77,13 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="img-file">
-                                                @if($user->pic)
-                                                    <img src="{{ $user->pic }}" alt="img"
-                                                         class="img-fluid"/>
-                                                @elseif($user->gender === "male")
-                                                    <img src="{{ asset('images/authors/avatar3.png') }}" alt="..."
-                                                         class="img-fluid"/>
-                                                @elseif($user->gender === "female")
-                                                    <img src="{{ asset('images/authors/avatar5.png') }}" alt="..."
-                                                         class="img-fluid"/>
-                                                @else
-                                                    <img src="{{ asset('images/authors/no_avatar.jpg') }}" alt="..."
-                                                         class="img-fluid"/>
-                                                @endif
-                                            </div>
-                                        </div>
                                         <div class="col-md-8">
                                                 <div class="table-responsive-lg table-responsive-sm table-responsive-md table-responsive">
                                                     <table class="table table-bordered table-striped" id="users">
                                                         <tr>
-                                                            <td>@lang('users/title.first_name')</td>
+                                                            <td>@lang('users/title.full_name')</td>
                                                             <td>
-                                                                <p class="user_name_max">{{ $user->first_name }}</p>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>@lang('users/title.last_name')</td>
-                                                            <td>
-                                                                <p class="user_name_max">{{ $user->last_name }}</p>
-                                                            </td>
-
-                                                        </tr>
-                                                        <tr>
-                                                            <td>@lang('users/title.email')</td>
-                                                            <td>
-                                                                {{ $user->email }}
+                                                                <p class="user_name_max">{{ $user->full_name }}</p>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -149,18 +119,6 @@
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td>@lang('users/title.state')</td>
-                                                            <td>
-                                                                {{ $user->user_state }}
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>@lang('users/title.city')</td>
-                                                            <td>
-                                                                {{ $user->city }}
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
                                                             <td>@lang('users/title.address')</td>
                                                             <td>
                                                                 {{ $user->address }}
@@ -183,14 +141,14 @@
                                                                 @if($user->is_verified === 'banned')
                                                                     تایید نشده
                                                                 @elseif($user->is_verified === 'process')
-                                                                    در حال انتظار
+                                                                    در انتظار تأیید
                                                                 @elseif($user->is_verified === 'verified')
                                                                     تایید شده
                                                                 @endif
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td>@lang('users/title.phone')</td>
+                                                            <td>@lang('users/title.mobile_number')</td>
                                                             <td>{{ $user->mobile_number }}</td>
                                                         </tr>
                                                         <tr>
@@ -204,7 +162,7 @@
                                                         <tr>
                                                             <td>@lang('users/title.created_at')</td>
                                                             <td>
-                                                                {!! $user->created_at->diffForHumans() !!}
+                                                                {{ verta($user->created_at)->format('H:m:s Y-m-d') }}
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -218,7 +176,7 @@
                         </div>
                     <div id="tab2" class="tab-pane fade">
                         <div class="row">
-                            
+
                         </div>
                     </div>
                 </div>

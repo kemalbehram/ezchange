@@ -3,6 +3,7 @@
 require_once 'web_builder.php';
 
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\BankCardController;
 use App\Http\Controllers\FrontEndController;
 use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
@@ -24,8 +25,7 @@ Route::group(
     ['prefix' => 'admin', 'namespace' => 'Admin'],
     function () {
         /* start ezchabge custom routes */
-        Route::get('orders-list', [FrontendController::class, "orders_list"])->name('orders-list');
-        Route::get('orders-det', [FrontendController::class, "orders_det"])->name('orders-det');
+        Route::get('orders', [FrontendController::class, "orders_list"])->name('orders-list');
         /* end ezchange custom routes */
 
         // Error pages should be shown without requiring login
@@ -150,11 +150,12 @@ Route::group(
         Route::group(
             ['prefix' => 'bankcards'],
             function () {
-                Route::get('data', [OrderController::class, 'data_table'])->name('bankcards.data');
-                Route::get('{card}/delete', [UsersController::class, 'destroy'])->name('orders.delete');
-                Route::get('{card}/confirm-delete', [UsersController::class, 'getModalDelete'])->name('orders.confirm-delete');
-                Route::get('{card}/restore', [UsersController::class, 'getRestore'])->name('restore.user');
-                Route::post('passwordreset', [UsersController::class, 'passwordreset'])->name('passwordreset');
+                Route::get('data', [BankCardController::class, 'data_table'])->name('bankcards.data');
+                Route::get('{card}/delete', [UsersController::class, 'destroy'])->name('bankcards.delete');
+                Route::get('{card}/confirm-delete', [UsersController::class, 'getModalDelete'])->name('bankcards.confirm-delete');
+                Route::get('{card}/restore', 'UsersController@getRestore')->name('restore.bankcard');
+                Route::get('{card}/show', 'UsersController@getRestore')->name('bankcards.show');
+                Route::get('{card}/edit', 'UsersController@getRestore')->name('bankcards.edit');
             }
         );
 

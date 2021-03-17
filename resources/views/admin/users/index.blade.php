@@ -45,8 +45,9 @@
                                 <tr class="filters">
                                     <th>@lang('users/title.id')</th>
                                     <th>@lang('users/title.full_name')</th>
-                                    <th>@lang('users/title.email')</th>
-                                    <th>@lang('users/title.status')</th>
+                                    <th>@lang('users/title.national_code')</th>
+                                    <th>@lang('users/title.mobile_number')</th>
+                                    <th>@lang('users/title.verification_status')</th>
                                     <th>@lang('users/title.created_at')</th>
                                     <th>@lang('users/title.actions')</th>
                                 </tr>
@@ -79,8 +80,9 @@
             columns: [
                 { data: 'id', name: 'id' },
                 { data: 'full_name', name: 'full_name' },
-                { data: 'email', name: 'email' },
-                { data: 'status', name: 'status'},
+                { data: 'national_code', name: 'national_code' },
+                { data: 'mobile_number', name: 'mobile_number' },
+                { data: 'is_verified', name: 'is_verified'},
                 { data: 'created_at', name:'created_at'},
                 { data: 'actions', name: 'actions', orderable: false, searchable: false }
             ]

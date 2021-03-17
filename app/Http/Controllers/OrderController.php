@@ -177,7 +177,7 @@ class OrderController extends Controller
         }
     }
 
-    public function send_order_request_to_jibit($amount, $user_identifier, $currency = 'TOMAN', $callback_url = null)
+    public function send_order_request_to_jibit($amount, $user_identifier, $currency = 'TOMAN', $callback_url = null): array
     {
         $reference_number = Str::orderedUuid()->getInteger()->toString();
         if ($callback_url === null or '')
@@ -278,7 +278,7 @@ class OrderController extends Controller
 
     public function show(Order $order)
     {
-        //
+        return view('admin.orders.show')->with('order', $order);
     }
 
     public function update(Request $request, Order $order)

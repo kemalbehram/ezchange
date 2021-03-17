@@ -22,11 +22,6 @@ use App\Models\Country;
 class UsersController extends JoshController
 {
 
-    /**
-     * Show a list of all the users.
-     *
-     * @return View
-     */
     private $user_activation = false;
     protected $countries;
 
@@ -35,7 +30,11 @@ class UsersController extends JoshController
         $this->countries = Country::all()->pluck('name', 'sortname')->toArray();
     }
 
-
+    /**
+     * Show a list of all the users.
+     *
+     * @return View
+     */
     public function index()
     {
 
@@ -49,25 +48,29 @@ class UsersController extends JoshController
     /**
      * @return mixed
      */
-    public function data()
+    public function data(Request $request)
     {
-        $users = User::get(['id', 'first_name', 'last_name', 'email','created_at']);
+        $users = User::all(['id', 'full_name', 'national_code', 'mobile_number', 'is_verified', 'created_at']);
 
         return DataTables::of($users)
             ->editColumn(
                 'created_at',
                 function (User $user) {
-                    return $user->created_at->diffForHumans();
+                    return verta($user->created_at)->format('H:m:s Y-m-d');
                 }
             )
             ->addColumn(
-                'status',
-                function ($user) {
+                'is_verified',
+                function (User $user) {
 
-                    if ($activation = Activation::completed($user)) {
-                        return 'Activated';
-                    } else {
-                                        return 'Pending';
+                    if ($user->is_verified == 'banned')
+                    {
+                        return __('users/title.banned');
+                    } else if ($user->is_verified == 'process')
+                    {
+                        return __('users/title.process');
+                    } else if ($user->is_verified == 'verified') {
+                        return __('users/title.verified');
                     }
                 }
             )
@@ -431,9 +434,9 @@ class UsersController extends JoshController
             // Get the user information
             $user = Sentinel::findUserById($id);
             //get country name
-            if ($user->country) {
-                $user->country = $this->countries[$user->country];
-            }
+//            if ($user->country) {
+//                $user->country = $this->countries[$user->country];
+//            }
         } catch (UserNotFoundException $e) {
             // Prepare the error message
             $error = trans('users/message.user_not_found', compact('id'));

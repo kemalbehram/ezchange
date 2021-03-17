@@ -33,6 +33,7 @@ class FrontEndController extends JoshController
     {
         return view('admin.orders.orders_list');
     }
+
     public function orders_det()
     {
         return view('admin.orders.orders_det');

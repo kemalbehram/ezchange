@@ -9,9 +9,41 @@ use Egulias\EmailValidator\Exception\LocalOrReservedDomain;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
+use Yajra\DataTables\DataTables;
+
 
 class BankCardController extends Controller
 {
+    public function data_table()
+    {
+        $cards = BankCard::all(['id', 'owner_first_name', 'owner_last_name', 'bank','account_number', 'card_number', 'iban', 'deposit', 'withdraw', 'created_at']);
+
+        return DataTables::of($cards)
+            ->editColumn(
+                'created_at',
+                function (BankCard $card) {
+                    return $card->created_at->diffForHumans();
+                }
+            )
+            ->editColumn(
+                'bank',
+                function (BankCard $card) {
+
+                    return $card->created_at->diffForHumans();
+                }
+            )
+            ->addColumn(
+                'actions',
+                function (BankCard $card) {
+                    $actions = '<a href='. route('admin.bankcards.show', $card->id) .'><i class="livicon" data-name="info" data-size="18" data-loop="true" data-c="#428BCA" data-hc="#428BCA" title="view user"></i></a>
+                            <a href='. route('admin.bankcards.edit', $card->id) .'><i class="livicon" data-name="edit" data-size="18" data-loop="true" data-c="#428BCA" data-hc="#428BCA" title="update user"></i></a>';
+                    return $actions;
+                }
+            )
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+
     public function index()
     {
         $cards = BankCard::all();
